@@ -6,37 +6,44 @@ const list = [
     {
         name: 'Segunda-feira',
         avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 10
     },
     {
         name: 'Terça-feira',
         avatar_url: <Avatar rounded title="T" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 10
     },
     {
         name: 'Quarta-feira',
         avatar_url: <Avatar rounded title="Q" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 10
     },
     {
         name: 'Quinta-quarta',
         avatar_url: <Avatar rounded title="Q" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 13
     },
     {
         name: 'Sexta-feira',
         avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 13
     },
     {
         name: 'Sabado',
         avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 20
     },
     {
         name: 'Domingo',
         avatar_url: <Avatar rounded title="D" />,
-        subtitle: 'Pressione para visualizar'
+        subtitle: 'Pressione para visualizar',
+        value: 0
     },
 ]
   
@@ -58,6 +65,7 @@ export default class StartCalendarScreen extends React.Component {
         leftAvatar={item.avatar_url}
         bottomDivider
         chevron
+        badge={{ value: item.value, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
         onPress={() => {
             this.props.navigation.navigate('NewDay', {name: 'Jane'})
         }}

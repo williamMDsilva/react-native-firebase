@@ -129,12 +129,14 @@ const styles = StyleSheet.create({
       justifyContent:'center'
     },
     textMenu: {
-      padding:15
+      padding:15,
+      color:'#FAFAFA'
     },
+    //style={{flexGrow:1, backgroundColor:'#33691E', alignItems:'center' }}
     proximoSkill:{
       justifyContent:'center',
       alignItems:'center',
-      backgroundColor: '#90CAF9',
+      backgroundColor: '#0277BD',
     },
     containerSkill:{ 
       flexGrow: 1,
