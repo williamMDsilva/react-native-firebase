@@ -30,75 +30,108 @@ export default class StartScreen extends React.Component {
         })
     }
 
+    transformeData(){
+        return [
+             {value: Math.round(this.state.skillA * 10)},
+             {value: Math.round(this.state.skillB * 10)},
+             {value: Math.round(this.state.skillC * 10)},
+             {value: Math.round(this.state.skillD * 10)},
+             {value: Math.round(this.state.skillE * 10)},
+             {value: Math.round(this.state.skillF * 10)},
+             {value: Math.round(this.state.skillG * 10)},
+        ]
+    }
+
     render() {
         const {navigate} = this.props.navigation;
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ height: 100, justifyContent: 'center', paddingHorizontal: 15 }}>
-                    <Text> Selecione seu nivel de Habilidade de cada item: </Text>
+                    <Text> Selecione seu nivel de Habilidade: </Text>
                 </View>
                 <ScrollView tyle={{ height: height }}>
                     <View style={styles.containerSkill}>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 1</Text>
+                            <Text>Habilidade A</Text>
                             <Slider
                                 value={this.state.skillA}
                                 onValueChange={skillA => this.setState({ skillA })}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 style={{ flexGrow: 3 }}
                             />
                             <Badge value={Math.round(this.state.skillA * 10)} status="primary" containerStyle={{ flexGrow: 1 }} />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 2</Text>
+                            <Text>Habilidade B</Text>
                             <Slider
                                 value={this.state.skillB}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillB => this.setState({ skillB })}
                             />
                             <Badge value={Math.round(this.state.skillB * 10)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 3</Text>
+                            <Text>Habilidade C</Text>
                             <Slider
                                 value={this.state.skillC}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillC => this.setState({ skillC })}
                             />
                             <Badge value={Math.round(this.state.skillC * 10)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 4</Text>
+                            <Text>Habilidade D</Text>
                             <Slider
                                 value={this.state.skillD}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillD => this.setState({ skillD })}
                             />
                             <Badge value={Math.round(this.state.skillD * 10)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 5</Text>
+                            <Text>Habilidade E</Text>
                             <Slider
                                 value={this.state.skillE}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillE => this.setState({ skillE })}
                             />
                             <Badge value={Math.round(this.state.skillE * 10)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 6</Text>
+                            <Text>Habilidade F</Text>
                             <Slider
                                 value={this.state.skillF}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillF => this.setState({ skillF })}
                             />
                             <Badge value={Math.round(this.state.skillF * 10)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade 7</Text>
+                            <Text>Habilidade G</Text>
                             <Slider
                                 value={this.state.skillG}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillG => this.setState({ skillG })}
                             />
                             <Badge value={Math.round(this.state.skillG * 10)} status="primary" />
                         </View>
                     </View>
 
-                    <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('StartCalendar', { name: 'Jane' })}>
+                    <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('RadarSkils', { name: 'Jane', dataSetRadarChart: this.transformeData()})}>
                         {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
                     <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
                     <Text style={styles.textMenu}>Agenda</Text>

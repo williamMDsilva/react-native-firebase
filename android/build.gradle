@@ -14,7 +14,8 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.1")
-
+		//implementation 'com.github.User:Repo:Tag'
+        project(':react-native-charts-wrapper')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -34,5 +35,6 @@ allprojects {
 
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
