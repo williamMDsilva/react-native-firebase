@@ -1,10 +1,8 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, ScrollView, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView, TouchableHighlight, Dimensions } from 'react-native';
 import {  ListItem, Slider, Badge } from 'react-native-elements';
 import { StatusBar } from 'react-native';
 // import {  } from 'react-native-gesture-handler';
-import {Dimensions } from "react-native";
-
 const {height, width} = Dimensions.get('window');
 
 export default class StartScreen extends React.Component {
@@ -19,6 +17,7 @@ export default class StartScreen extends React.Component {
         }
     }
     componentDidMount(){
+
         this.setState({
             skillA: 0.1,
             skillB: 0.1,
@@ -27,32 +26,33 @@ export default class StartScreen extends React.Component {
             skillE: 0.1,
             skillF: 0.1,
             skillG: 0.1,
+            skillH: 0.1,
         })
     }
 
     transformeData(){
         return [
-             {value: Math.round(this.state.skillA * 10)},
-             {value: Math.round(this.state.skillB * 10)},
-             {value: Math.round(this.state.skillC * 10)},
-             {value: Math.round(this.state.skillD * 10)},
-             {value: Math.round(this.state.skillE * 10)},
-             {value: Math.round(this.state.skillF * 10)},
-             {value: Math.round(this.state.skillG * 10)},
+             {value: Math.round(this.state.skillA * 100)},
+             {value: Math.round(this.state.skillB * 100)},
+             {value: Math.round(this.state.skillC * 100)},
+             {value: Math.round(this.state.skillD * 100)},
+             {value: Math.round(this.state.skillE * 100)},
+             {value: Math.round(this.state.skillF * 100)},
+             {value: Math.round(this.state.skillG * 100)},
+             {value: Math.round(this.state.skillH * 100)},
         ]
     }
 
     render() {
-        const {navigate} = this.props.navigation;
         return (
             <View style={{ flex: 1 }}>
-                <View style={{ height: 100, justifyContent: 'center', paddingHorizontal: 15 }}>
-                    <Text> Selecione seu nivel de Habilidade: </Text>
+                <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>
+                    <Text> Mapa de avaliação: </Text>
                 </View>
-                <ScrollView tyle={{ height: height }}>
+                <ScrollView style={{ height: height }}>
                     <View style={styles.containerSkill}>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade A</Text>
+                            <Text>Vibrato</Text>
                             <Slider
                                 value={this.state.skillA}
                                 onValueChange={skillA => this.setState({ skillA })}
@@ -61,10 +61,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 style={{ flexGrow: 3 }}
                             />
-                            <Badge value={Math.round(this.state.skillA * 10)} status="primary" containerStyle={{ flexGrow: 1 }} />
+                            <Badge value={Math.round(this.state.skillA * 100)} status="primary" containerStyle={{ flexGrow: 1 }} />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade B</Text>
+                            <Text>Troca de posição</Text>
                             <Slider
                                 value={this.state.skillB}
                                 thumbTintColor={'#1A237E'}
@@ -72,10 +72,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillB => this.setState({ skillB })}
                             />
-                            <Badge value={Math.round(this.state.skillB * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillB * 100)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade C</Text>
+                            <Text>Stacato</Text>
                             <Slider
                                 value={this.state.skillC}
                                 thumbTintColor={'#1A237E'}
@@ -83,10 +83,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillC => this.setState({ skillC })}
                             />
-                            <Badge value={Math.round(this.state.skillC * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillC * 100)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade D</Text>
+                            <Text>Legato</Text>
                             <Slider
                                 value={this.state.skillD}
                                 thumbTintColor={'#1A237E'}
@@ -94,10 +94,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillD => this.setState({ skillD })}
                             />
-                            <Badge value={Math.round(this.state.skillD * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillD * 100)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade E</Text>
+                            <Text>Detaché</Text>
                             <Slider
                                 value={this.state.skillE}
                                 thumbTintColor={'#1A237E'}
@@ -105,10 +105,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillE => this.setState({ skillE })}
                             />
-                            <Badge value={Math.round(this.state.skillE * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillE * 100)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade F</Text>
+                            <Text>Qualidade do som</Text>
                             <Slider
                                 value={this.state.skillF}
                                 thumbTintColor={'#1A237E'}
@@ -116,10 +116,10 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillF => this.setState({ skillF })}
                             />
-                            <Badge value={Math.round(this.state.skillF * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillF * 100)} status="primary" />
                         </View>
                         <View style={styles.contentSlider}>
-                            <Text>Habilidade G</Text>
+                            <Text>Afinação</Text>
                             <Slider
                                 value={this.state.skillG}
                                 thumbTintColor={'#1A237E'}
@@ -127,11 +127,21 @@ export default class StartScreen extends React.Component {
                                 maximumTrackTintColor={'#E8EAF6'}
                                 onValueChange={skillG => this.setState({ skillG })}
                             />
-                            <Badge value={Math.round(this.state.skillG * 10)} status="primary" />
+                            <Badge value={Math.round(this.state.skillG * 100)} status="primary" />
+                        </View>
+                        <View style={styles.contentSlider}>
+                            <Text>Agilidade</Text>
+                            <Slider
+                                value={this.state.skillH}
+                                thumbTintColor={'#1A237E'}
+                                minimumTrackTintColor={'#1A237E'}
+                                maximumTrackTintColor={'#E8EAF6'}
+                                onValueChange={skillH => this.setState({ skillH })}
+                            />
+                            <Badge value={Math.round(this.state.skillH * 100)} status="primary" />
                         </View>
                     </View>
-
-                    <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('RadarSkils', { name: 'Jane', dataSetRadarChart: this.transformeData()})}>
+                    <TouchableHighlight style={styles.proximoSkill} onPress={() => this.props.navigation.navigate('RadarSkils', { "dataSetRadarChart": this.transformeData() } )}>
                         {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
                     <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
                     <Text style={styles.textMenu}>Agenda</Text>

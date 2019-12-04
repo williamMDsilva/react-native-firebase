@@ -19,7 +19,8 @@ export default class NewDayScreen extends React.Component {
     showDialog = () => {
         this.setState({ dialogVisible: true });
     };
-
+    ComponentDidMount(){
+    }
     constructor(props){
         super(props);
         this.state = {
@@ -73,20 +74,7 @@ export default class NewDayScreen extends React.Component {
                     }
                     onPress={()=>{
                        
-                    }}
-                    onLongPress={()=>Alert.alert(
-                        'Escala de G',
-                        'Escala de G em 2 posição',
-                        [
-                          {
-                            text: 'Editar',
-                            onPress: () => console.log(l),
-                            style: 'cancel',
-                          },
-                          {text: 'Deletar', onPress: () => console.log(l)},
-                        ],
-                        //{cancelable: true},
-                      )}
+                    }}                    
                 />
                 ))
             }
@@ -102,7 +90,7 @@ export default class NewDayScreen extends React.Component {
                         style={{flexGrow:1, backgroundColor:'#33691E', alignItems:'center' }}
                         onPress={this.showDialog}
                     >
-                         <Text style={{padding:15, color:'#FAFAFA'}}> Novo </Text>
+                         <Text style={{padding:15, color:'#FAFAFA'}}> Salvar </Text>
                     </TouchableHighlight>
 
                 </View>

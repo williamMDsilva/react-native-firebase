@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "468677390196",
+    "firebase_url": "https://tvf-sonata.firebaseio.com",
+    "project_id": "tvf-sonata",
+    "storage_bucket": "tvf-sonata.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468677390196:android:cadf1539ebecc7a076c621",
+        "android_client_info": {
+          "package_name": "com.sonata"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "468677390196-5mbsghfb94b283bvaanviql888j5e00h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfmEovmF4oRou-IuCBn1aJ_G6FDJSzFZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "468677390196-5mbsghfb94b283bvaanviql888j5e00h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, FlatList, View, Button } from 'react-native';
+import { StyleSheet, FlatList, View, TouchableHighlight, Text } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
+import {Dimensions } from "react-native";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const list = [
     {
@@ -43,17 +45,18 @@ const list = [
         name: 'Domingo',
         avatar_url: <Avatar rounded title="D" />,
         subtitle: 'Pressione para visualizar',
-        value: 0
+        value: 10
     },
 ]
-  
+const {height, width} = Dimensions.get('window');
 
 export default class StartCalendarScreen extends React.Component {
     static navigationOptions = {
-        title: 'Crie sua agenda',
+        title: 'Minha rotina de estudo',
     };
 
     ComponentDidMount(){
+
     }
 
     keyExtractor = (item, index) => index.toString()
@@ -75,20 +78,37 @@ export default class StartCalendarScreen extends React.Component {
     render() {
         const {navigate} = this.props.navigation;
         return (
-            <View style={{ flex: 1 }}> 
-            <View>
+            <View style={{ flex: 1, height }}>
+                <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>
+                    <Text>
+                        Minha rotina de estudo
+                    </Text>
+                </View>
                 <FlatList
                     keyExtractor={this.keyExtractor}
                     data={list}
                     renderItem={this.renderItem}
                     />
-            </View>
-
-                <Button
-                    title="Salvar"
-                    onPress={() => navigate('Home', {name: 'Jane'})}
-                />
+                     <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('ConfigAlarm', {name: 'Jane'})}>
+                        {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
+                    <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
+                    <Text style={styles.textMenu}>Agenda</Text>
+                </View> */}
+                        <Text style={styles.textMenu}>Proximo</Text>
+                </TouchableHighlight>
             </View>
         );
     }
 }
+const styles = StyleSheet.create({
+    textMenu: {
+        padding:15,
+        color:'#FAFAFA'
+      },
+      //style={{flexGrow:1, backgroundColor:'#33691E', alignItems:'center' }}
+      proximoSkill:{
+        justifyContent:'center',
+        alignItems:'center',
+        backgroundColor: '#0277BD',
+      }
+})

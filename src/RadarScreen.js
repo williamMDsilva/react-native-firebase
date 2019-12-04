@@ -23,10 +23,12 @@ export default class RadarScreen extends React.Component {
             wordWrapEnabled: false
           },
           dataSetsValue: this.props.navigation.getParam('dataSetRadarChart', []),
-        };
+        };      
+        
       }
-      componentDidMount() {
-
+      
+      componentDidMount(){
+        console.log(this.props)
         this.setState(
           update(this.state, {
             data: {
@@ -47,11 +49,12 @@ export default class RadarScreen extends React.Component {
             },
             xAxis: {
               $set: {
-                valueFormatter: ['HABILIDADE A', 'HABILIDADE B', 'HABILIDADE C', 'HABILIDADE D', 'HABILIDADE E', 'HABILIDADE F', 'HABILIDADE G']
+                valueFormatter: ['Vibrato', 'Troca de posição', 'Stacato', 'Legato', 'Detaché', 'Qualidade do som', 'Afinação', 'Agilidade']
               }
             }
           })
         );
+
       }
     
       handleSelect(event) {
@@ -66,6 +69,7 @@ export default class RadarScreen extends React.Component {
       }
     render() {
         const {navigate} = this.props.navigation;
+
         return (
             <View style={{flex: 1}}>
                 <View style={{flex: 1}}>
@@ -97,13 +101,13 @@ export default class RadarScreen extends React.Component {
                 </View>   
                 {/* <TouchableHighlight
             style={{flex:1, height, width, alignContent: 'center', justifyContent: 'center', alignItems: 'center'}}
-                onPress={() => navigate('', {name: 'Jane'})}
+                onPress={() => navigate('', {name: 'Jane'}, currentUser)}
             >
                 <Text style={{flex:1, }}>Gerar dados</Text>
             </TouchableHighlight> */}
 
 
-            <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('StartCalendar', { name: 'Jane', 'setHabilidades': this.state.dataSetsValue })}>
+            <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('StartCalendar', { name: 'Jane' })}>
                         {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
                     <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
                     <Text style={styles.textMenu}>Agenda</Text>

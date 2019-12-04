@@ -1,20 +1,41 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, ImageBackground, Dimensions, TouchableHighlight, Image } from 'react-native';
 
-import {Dimensions } from "react-native";
 const {height, width} = Dimensions.get('window');
+
+import firebase from 'react-native-firebase'
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
         title: 'Bem-Vindo',
     };
+    constructor(props){
+        super(props);
+        this.state = {
+            currentUser: null
+        }
+    }
+    componentDidMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            this.props.navigation.navigate(user ? 'Home' : 'Login')
+        })
+
+        const { currentUser } = firebase.auth()
+        this.setState({ currentUser })
+    }
     render() {
         const {navigate} = this.props.navigation;
         return (<TouchableHighlight
-            style={{flex:1, height, width, alignContent: 'center', justifyContent: 'center', alignItems: 'center'}}
-                onPress={() => navigate('Start', {name: 'Jane'})}
+            style={{flex: 1}}
+                onPress={() => navigate('Start', {name: 'Jane', currentUser: this.state.currentUser})}
             >
-                <Text style={{flex:1, }}>Toque na tela para iniciar</Text>
+                <ImageBackground 
+                    style={{flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignContent:'center', paddingVertical: 50 }}
+                    source={require('./img/logo.jpeg')}>
+                    <Text>Toque na tela para iniciar</Text>
+                </ImageBackground>
             </TouchableHighlight>);
+
+            
     }
 }

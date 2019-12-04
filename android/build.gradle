@@ -15,6 +15,8 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.1")
 		//implementation 'com.github.User:Repo:Tag'
+        classpath("com.google.gms:google-services:4.2.0")
+
         project(':react-native-charts-wrapper')
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
