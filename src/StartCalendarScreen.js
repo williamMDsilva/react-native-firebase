@@ -3,6 +3,7 @@ import { StyleSheet, FlatList, View, TouchableHighlight, Text } from 'react-nati
 import { ListItem, Avatar } from 'react-native-elements'
 import {Dimensions } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
+import { Title as TitleSkill } from 'react-native-paper';
 
 const list = [
     {
@@ -62,27 +63,25 @@ export default class StartCalendarScreen extends React.Component {
     keyExtractor = (item, index) => index.toString()
 
     renderItem = ({ item }) => (
-    <ListItem
-        title={item.name}
-        subtitle={item.subtitle}
-        leftAvatar={item.avatar_url}
-        bottomDivider
-        chevron
-        badge={{ value: item.value, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
-        onPress={() => {
-            this.props.navigation.navigate('NewDay', {name: 'Jane'})
-        }}
-    />
+        <ListItem
+            title={item.name}
+            subtitle={item.subtitle}
+            leftAvatar={item.avatar_url}
+            bottomDivider
+            chevron
+            badge={{ value: item.value, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
+            onPress={() => {
+                this.props.navigation.navigate('NewDay', {name: 'Jane'})
+            }}
+        />
     )
 
     render() {
         const {navigate} = this.props.navigation;
         return (
             <View style={{ flex: 1, height }}>
-                <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>
-                    <Text>
-                        Minha rotina de estudo
-                    </Text>
+                <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>                        
+                    <TitleSkill style={{textAlign: "center"}}>Minha rotina de estudo</TitleSkill>
                 </View>
                 <FlatList
                     keyExtractor={this.keyExtractor}

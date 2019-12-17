@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableHighlight, Dimensions} from 'react-native';
 import DatePicker from 'react-native-datepicker'
+import { Title as TitleSkill } from 'react-native-paper';
 
 const {height, width} = Dimensions.get('window');
 
@@ -16,9 +17,7 @@ export default class ConfigAlarm extends React.Component {
         const {navigate} = this.props.navigation;
         return (<View style={{flex: 1, height}}>
             <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>
-                <Text>
-                    Configurar horario de estudo
-                </Text>
+                <TitleSkill style={{textAlign: "center"}}>Configurar horario de estudo</TitleSkill>
             </View>
             <View style={styles.styleDatapick}>
                 <DatePicker

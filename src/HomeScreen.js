@@ -12,16 +12,22 @@ export default class HomeScreen extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            currentUser: null
+            currentUser: '123456',
+            firstAcess: true
         }
     }
     componentDidMount() {
-        firebase.auth().onAuthStateChanged(user => {
-            this.props.navigation.navigate(user ? 'Home' : 'Login')
-        })
+        // firebase.auth().onAuthStateChanged(user => {
+        //     this.props.navigation.navigate(user ? 'Home' : 'Login')
+        // })
 
-        const { currentUser } = firebase.auth()
-        this.setState({ currentUser })
+        // const { currentUser } = firebase.auth()
+        // this.setState({ currentUser })
+        if(this.state.firstAcess){
+            //this.props.navigation.navigate(user ? 'Home' : 'Login')
+        }else{
+            this.props.navigation.navigate('HomeDash')
+        }
     }
     render() {
         const {navigate} = this.props.navigation;
