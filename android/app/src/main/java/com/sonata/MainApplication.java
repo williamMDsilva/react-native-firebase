@@ -13,7 +13,7 @@ import com.facebook.soloader.SoLoader;
 
 import com.github.wuxudong.rncharts.MPAndroidChartPackage;
 import io.invertase.firebase.auth.RNFirebaseAuthPackage;
-
+import io.invertase.firebase.firestore.RNFirebaseFirestorePackage;
 import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -32,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
       // packages.add(new MyReactNativePackage());
       packages.add(new RNFirebaseAuthPackage());
       packages.add(new MPAndroidChartPackage());
+      packages.add(new RNFirebaseFirestorePackage());
       
       return packages;
     }

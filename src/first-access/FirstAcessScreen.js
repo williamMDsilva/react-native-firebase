@@ -3,45 +3,38 @@ import { StyleSheet, Text, ImageBackground, Dimensions, TouchableHighlight, Imag
 
 const {height, width} = Dimensions.get('window');
 
-import firebase from 'react-native-firebase'
-
-export default class HomeScreen extends React.Component {
+export default class FirstAcessScreen extends React.Component {
     static navigationOptions = {
         title: 'Bem-Vindo',
     };
     constructor(props){
         super(props);
         this.state = {
-            currentUser: '123456',
-            firstAcess: true
+            user: {},
+            dataUsuario: {},
         }
     }
     componentDidMount() {
-        // firebase.auth().onAuthStateChanged(user => {
-        //     this.props.navigation.navigate(user ? 'Home' : 'Login')
-        // })
-
-        // const { currentUser } = firebase.auth()
-        // this.setState({ currentUser })
-        if(this.state.firstAcess){
-            //this.props.navigation.navigate(user ? 'Home' : 'Login')
-        }else{
-            this.props.navigation.navigate('HomeDash')
+        const user = this.props.navigation.getParam('user', null);
+        const dataUsuario = this.props.navigation.getParam('dataUsuario', null);
+        if(user == null || dataUsuario == null){
+            this.props.navigation.navigate('Login');
         }
+        this.setState({user, dataUsuario});
     }
+
     render() {
         const {navigate} = this.props.navigation;
+        const {user, dataUsuario} = this.state;
         return (<TouchableHighlight
             style={{flex: 1}}
-                onPress={() => navigate('Start', {name: 'Jane', currentUser: this.state.currentUser})}
+                onPress={() => navigate('RadarSkills', {user, dataUsuario})}
             >
                 <ImageBackground 
                     style={{flex:1, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', alignContent:'center', paddingVertical: 50 }}
-                    source={require('./img/logo.jpeg')}>
+                    source={require('../img/logo.jpeg')}>
                     <Text>Toque na tela para iniciar</Text>
                 </ImageBackground>
             </TouchableHighlight>);
-
-            
     }
 }

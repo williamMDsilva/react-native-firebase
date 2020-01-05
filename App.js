@@ -3,34 +3,33 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
-import StartScreen from './src/StartScreen'
-import HomeScreen from './src/HomeScreen'
+import SkillConfig from './src/first-access/SkillConfig'
+import FirstAcessScreen from './src/first-access/FirstAcessScreen'
 import StartCalendarScreen from './src/StartCalendarScreen'
 import NewDayScreen from './src/NewDayScreen'
-import RadarSkils from './src/RadarScreen'
+import RadarSkills from './src/first-access/RadarSkills'
 import ConfigAlarm from './src/ConfigAlarm'
+import Loading from './src/Loading'
 import Login from './src/auth/Login'
 import SignUp from './src/auth/SignUp'
 import HomeDash from './src/dash/HomeDash'
 
 const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
-  Start: {screen: StartScreen},
+  Loading: {screen: Loading},
+  FirstLogin: {screen: FirstAcessScreen},
+  SkillConfig: {screen: SkillConfig},
   StartCalendar: {screen: StartCalendarScreen},
   NewDay: {screen: NewDayScreen},
-  RadarSkils: {screen: RadarSkils},
+  RadarSkills: {screen: RadarSkills},
   ConfigAlarm: {screen: ConfigAlarm,},
   Login: {screen: Login,},
   SignUp: {screen: SignUp,},
   HomeDash: {screen: HomeDash,},
 }, {
-  initialRouteName: 'Home',
+  initialRouteName: 'Loading',
   // headerStyle: { marginTop: 24 },
   headerMode: 'none',
 });
-
-// const App = createAppContainer(MainNavigator);
-// export default App;
 
 const theme = {
   ...DefaultTheme,

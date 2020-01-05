@@ -1,15 +1,19 @@
 import * as React from 'react';
-import { BottomNavigation, Text } from 'react-native-paper';
+import { BottomNavigation } from 'react-native-paper';
 
-const HomeRoute = () => <Text>home</Text>;
-
-const MapaRoute = () => <Text>Mapa</Text>;
-
-const ConfigRoute = () => <Text>Configuração</Text>;
-
-const PerfilRoute = () => <Text>Perfil</Text>;
+import HomeRoute from './MenuScreen/HomeRoute'
+import MapaRoute from './MenuScreen/MapaRoute'
+import ConfigRoute from './MenuScreen/ConfigRoute'
+import PerfilRoute from './MenuScreen/PerfilRoute'
+import LogOut from './MenuScreen/LogOut'
 
 export default class HomeDash extends React.Component {
+  static navigationOptions = {
+    title: 'Dash',
+  };
+  constructor(props){
+    super(props);
+  }
   state = {
     index: 0,
     routes: [
@@ -17,6 +21,7 @@ export default class HomeDash extends React.Component {
       { key: 'mapa', title: 'Mapa', icon: 'map' },
       { key: 'perfil', title: 'Perfil', icon: 'account' },
       { key: 'config', title: 'Configuração', icon: 'settings' },
+      { key: 'logout', title: 'Sair', icon: 'logout' },
     ],
   };
 
@@ -27,6 +32,7 @@ export default class HomeDash extends React.Component {
     mapa: MapaRoute,
     perfil: PerfilRoute,
     config: ConfigRoute,
+    logout: LogOut,
   });
 
   render() {

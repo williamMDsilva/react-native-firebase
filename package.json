@@ -6,7 +6,8 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint .",
-    "android": "react-native run-android"
+    "android": "react-native run-android",
+    "clean:ps": "cd ./android/; ./gradlew clean; cd ..;"
   },
   "dependencies": {
     "immutability-helper": "^3.0.1",
@@ -16,13 +17,16 @@
     "react-native-datepicker": "^1.7.2",
     "react-native-dialog": "^5.6.0",
     "react-native-elements": "^1.2.0",
-    "react-native-firebase": "5.5.6",
+    "react-native-firebase": "^5.5.6",
     "react-native-gesture-handler": "^1.4.1",
+    "react-native-numeric-input": "^1.8.3",
     "react-native-paper": "^3.3.0",
+    "react-native-step-indicator": "0.0.11",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.5",
     "react-navigation-stack": "^1.8.0",
-    "react-svg-radar-chart": "^1.2.0"
+    "react-svg-radar-chart": "^1.2.0",
+    "rn-viewpager": "^1.2.9"
   },
   "devDependencies": {
     "@babel/core": "7.6.0",
