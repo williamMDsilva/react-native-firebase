@@ -1,4 +1,5 @@
 import React from 'react';
+import firebase from 'react-native-firebase';
 import {View, Text, StyleSheet, TouchableHighlight, Dimensions} from 'react-native';
 import DatePicker from 'react-native-datepicker'
 import { Title as TitleSkill } from 'react-native-paper';
@@ -13,8 +14,24 @@ export default class ConfigAlarm extends React.Component {
         super(props);
         this.state = {date:"08:00"}
     }
+    saveAndFinalize = () => {
+        const { date } = this.state;
+        const user = this.props.navigation.getParam('user', null);
+        if(user != null){
+            firebase.firestore()
+                .collection('usuarios')
+                .doc(user.uid)
+                .update({
+                    firstAccess: false,
+                    horarioEstudo: date,
+                }).then((data) => {
+                    this.props.navigation.navigate('HomeDash', { user })
+                }).catch((err) => {
+                    console.log("AlarmConfigure error", err)
+                });
+        }
+    }
     render() {
-        const {navigate} = this.props.navigation;
         return (<View style={{flex: 1, height}}>
             <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>
                 <TitleSkill style={{textAlign: "center"}}>Configurar horario de estudo</TitleSkill>
@@ -44,7 +61,7 @@ export default class ConfigAlarm extends React.Component {
                     onDateChange={(date) => {this.setState({date: date})}}
                 />
             </View>
-            <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('Home', {name: 'Jane'})}>
+            <TouchableHighlight style={styles.proximoSkill} onPress={this.saveAndFinalize}>
                         {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
                     <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
                     <Text style={styles.textMenu}>Agenda</Text>

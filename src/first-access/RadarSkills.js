@@ -1,14 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, TouchableHighlight, processColor } from 'react-native';
-
-import { Dimensions } from "react-native";
-const { height, width } = Dimensions.get('window');
-
-import { RadarChart } from 'react-native-charts-wrapper';
 import update from 'immutability-helper';
-
+import { StyleSheet, View, TouchableHighlight, processColor, Dimensions } from 'react-native';
+import { RadarChart } from 'react-native-charts-wrapper';
 import { Modal, Portal, Text, Provider, Avatar, Button, Card, Title, Paragraph, IconButton, TextInput } from 'react-native-paper';
 import NumericInput from 'react-native-numeric-input'
+import firebase from 'react-native-firebase';
+
+const { height, width } = Dimensions.get('window');
 
 export default class RadarSkills extends React.Component {
 	static navigationOptions = {
@@ -101,16 +99,6 @@ export default class RadarSkills extends React.Component {
 
 	}
 
-	// componentDidUpdate(nextProps, nextState){
-	// 	const user = nextProps.navigation.getParam('user', null);
-	// 	const dataUsuario = nextProps.navigation.getParam('dataUsuario', null);
-	// 	this.setState({
-	// 		...nextState,
-	// 		user,
-	// 		dataUsuario
-	// 	});
-	// }
-
 	handleSelect(event) {
 
 	}
@@ -121,14 +109,12 @@ export default class RadarSkills extends React.Component {
 			const { data } = selectedEntry;
 			let newData = dataUsuario.skills;
 
-			console.log(newData);
 			newData.forEach(element => {
 				if (element.chave === data.chave) {
 					//TODO
 					element.value = skillValue;
 				}
 			});
-			console.log(newData);
 
 			await this.updateSkills(newData, user)
 
@@ -136,14 +122,23 @@ export default class RadarSkills extends React.Component {
 		}
 	}
 
-	async updateSkills(data, user) {
-		await firestore()
+	updateSkills(skills, user) {
+		return firebase.firestore()
 			.collection('usuarios')
 			.doc(user.uid)
 			.update({
-				skills: data,
+				skills,
 			});
+			
 	}
+
+	saveMoveNext = () => {
+		const { navigate } = this.props.navigation;
+		const { dataUsuario, user} = this.state;
+		this.updateSkills(dataUsuario.skills, user).then((dados) =>{
+			navigate('StartCalendar', { dataUsuario, user})
+		})
+	};
 
 	renderModalSkill() {
 		const { visible, selectedEntry } = this.state;
@@ -158,12 +153,13 @@ export default class RadarSkills extends React.Component {
 
 	render() {
 		const { navigate } = this.props.navigation;
-		const { dataUsuario, user } = this.state;
+		const { dataUsuario } = this.state;
 
 		return (
 			<Provider>
 				<Portal>
-					<View style={{ alignItems: 'flex-end' }}>
+					<View style={{ alignItems: 'center' }}>
+						<Title >Mapa de avalição</Title>
 						<IconButton icon="pencil" onPress={() => navigate('SkillConfig', { skills: dataUsuario.skills, performUpdate: this.updateStateWhenSaveDataChart })} />
 					</View>
 					<View style={{ flex: 1 }}>
@@ -188,11 +184,11 @@ export default class RadarSkills extends React.Component {
 
 								skipWebLineCount={5}
 								onSelect={this.handleSelect.bind(this)}
-								onChange={(event) => console.log(event.nativeEvent)}
+								onChange={(event) => {}}
 							/>
 						</View>
 
-						<TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('StartCalendar')}>
+						<TouchableHighlight style={styles.proximoSkill} onPress={this.saveMoveNext}>
 							{/* <View style={{flexDirection:'column', alignItems: 'center'}}>
 										<Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
 										<Text style={styles.textMenu}>Agenda</Text>

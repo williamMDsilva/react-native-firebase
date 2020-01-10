@@ -1,14 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import SkillConfig from './src/first-access/SkillConfig'
 import FirstAcessScreen from './src/first-access/FirstAcessScreen'
-import StartCalendarScreen from './src/StartCalendarScreen'
-import NewDayScreen from './src/NewDayScreen'
+import StartCalendarScreen from './src/first-access/StartCalendarScreen'
+import NewDayScreen from './src/first-access/NewDayScreen'
 import RadarSkills from './src/first-access/RadarSkills'
-import ConfigAlarm from './src/ConfigAlarm'
+import ConfigAlarm from './src/first-access/ConfigAlarm'
 import Loading from './src/Loading'
 import Login from './src/auth/Login'
 import SignUp from './src/auth/SignUp'

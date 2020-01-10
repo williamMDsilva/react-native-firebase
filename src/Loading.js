@@ -11,7 +11,6 @@ export default class Loading extends React.Component {
             if (!user) {
                 this.props.navigation.navigate('Login')
             }
-            console.log(user)
             const refUsers = firebase.firestore().collection('usuarios').doc(user.uid);
             refUsers.get()
                 .then(doc => {

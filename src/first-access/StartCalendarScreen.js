@@ -1,83 +1,68 @@
 import React from 'react';
 import { StyleSheet, FlatList, View, TouchableHighlight, Text } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
-import {Dimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { ScrollView } from 'react-native-gesture-handler';
 import { Title as TitleSkill } from 'react-native-paper';
-
-const list = [
-    {
-        name: 'Segunda-feira',
-        avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar',
-        value: 10
-    },
-    {
-        name: 'Terça-feira',
-        avatar_url: <Avatar rounded title="T" />,
-        subtitle: 'Pressione para visualizar',
-        value: 10
-    },
-    {
-        name: 'Quarta-feira',
-        avatar_url: <Avatar rounded title="Q" />,
-        subtitle: 'Pressione para visualizar',
-        value: 10
-    },
-    {
-        name: 'Quinta-quarta',
-        avatar_url: <Avatar rounded title="Q" />,
-        subtitle: 'Pressione para visualizar',
-        value: 13
-    },
-    {
-        name: 'Sexta-feira',
-        avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar',
-        value: 13
-    },
-    {
-        name: 'Sabado',
-        avatar_url: <Avatar rounded title="S" />,
-        subtitle: 'Pressione para visualizar',
-        value: 20
-    },
-    {
-        name: 'Domingo',
-        avatar_url: <Avatar rounded title="D" />,
-        subtitle: 'Pressione para visualizar',
-        value: 10
-    },
-]
+import list from './Model/ListWeek'
 const {height, width} = Dimensions.get('window');
 
 export default class StartCalendarScreen extends React.Component {
     static navigationOptions = {
         title: 'Minha rotina de estudo',
     };
+    constructor(props) {
+        super(props);
+        const user = props.navigation.getParam('user', null);
+        const dataUsuario = props.navigation.getParam('dataUsuario', null);
+        if(user == null || dataUsuario == null){
+           props.navigation.navigate('Login');
+        }
+        this.state = {
+            user,
+            dataUsuario,
+            listItens: list
+        }
+    }
 
-    ComponentDidMount(){
+    componentDidMount(){
+
+    }
+
+    saveDay = () => {
 
     }
 
     keyExtractor = (item, index) => index.toString()
 
-    renderItem = ({ item }) => (
-        <ListItem
+    atualizeDayCount = (keyDataBase, dayData) => {
+        const { dataUsuario } = this.state
+
+        dataUsuario[keyDataBase] = dayData;
+        
+        this.setState({ dataUsuario, listItens: list});
+    }
+
+    renderItem = ({ item }) => {
+        const {dataUsuario, user} = this.state
+        return (<ListItem
             title={item.name}
             subtitle={item.subtitle}
-            leftAvatar={item.avatar_url}
+            leftAvatar={ <Avatar rounded title={item.avatar} /> }
             bottomDivider
             chevron
-            badge={{ value: item.value, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
+            badge={{ value: dataUsuario[item.keyDataBase] ? dataUsuario[item.keyDataBase].length : 0, textStyle: { color: 'white' }, containerStyle: { marginTop: -20 } }}
             onPress={() => {
-                this.props.navigation.navigate('NewDay', {name: 'Jane'})
+                this.props.navigation.navigate('NewDay', {dayData: dataUsuario[item.keyDataBase], dayConfig: item, user, atualizeDayCount: this.atualizeDayCount})
             }}
-        />
-    )
+        />)
+    }    
 
     render() {
         const {navigate} = this.props.navigation;
+        const { listItens } = this.state;
+        const { user } = this.state
+        
         return (
             <View style={{ flex: 1, height }}>
                 <View style={{ height: 50, justifyContent: 'center', paddingHorizontal: 15,  fontWeight: 900}}>                        
@@ -85,10 +70,10 @@ export default class StartCalendarScreen extends React.Component {
                 </View>
                 <FlatList
                     keyExtractor={this.keyExtractor}
-                    data={list}
+                    data={listItens}
                     renderItem={this.renderItem}
                     />
-                     <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('ConfigAlarm', {name: 'Jane'})}>
+                     <TouchableHighlight style={styles.proximoSkill} onPress={() => navigate('ConfigAlarm', { user })}>
                         {/* <View style={{flexDirection:'column', alignItems: 'center'}}>
                     <Ionicons name="md-calendar" style={{ color: '#212121', fontSize: 35 }} />
                     <Text style={styles.textMenu}>Agenda</Text>

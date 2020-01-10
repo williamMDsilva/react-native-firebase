@@ -7,7 +7,7 @@
     "test": "jest",
     "lint": "eslint .",
     "android": "react-native run-android",
-    "clean:ps": "cd ./android/; ./gradlew clean; cd ..;"
+    "clean:ps": "cd ./android; ./gradlew clean; cd ..;"
   },
   "dependencies": {
     "immutability-helper": "^3.0.1",
