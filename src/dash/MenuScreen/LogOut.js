@@ -11,9 +11,9 @@ export default class Loading extends React.Component {
     constructor(props) {
         super(props);
     }
-    componentDidMount() {
-        firebase.auth().signOut().then(function () {
-            this.props.navigation.navigate('Loading')
+    async componentDidMount() {
+        await firebase.auth().signOut().then(() => {
+            this.props.navigation.push('Loading');
         }).catch(function (error) {
             // An error happened.
         });
