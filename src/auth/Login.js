@@ -2,20 +2,20 @@ import React from 'react'
 import { StyleSheet, Text, TouchableHighlight, View, Dimensions } from 'react-native'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { TextInput, HelperText, Avatar } from 'react-native-paper';
+import { TextInput, Button, Avatar, Title, Snackbar } from 'react-native-paper';
 
 const { height, width } = Dimensions.get('window');
 import firebase from 'react-native-firebase'
 
 export default class Login extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
+  state = { email: '', password: '', errorMessage: null}
   handleLogin = () => {
     const { email, password } = this.state
     if (email && password) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(() => this.props.navigation.navigate('Home'))
+        .then((data) => this.props.navigation.navigate('Fire'))
         .catch(error => this.setState({ errorMessage: error.message }))
     } else {
       this.setState({ errorMessage: 'Verifique seu usuario e senha!' })
@@ -24,25 +24,16 @@ export default class Login extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Avatar.Icon size={24} icon="folder" />
-        {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {this.state.errorMessage}
-          </Text>}
+        
         <View style={styles.inputBox} >
 
           <TextInput
             mode="outlined"
-            label='Email'
+            label="Email"
             autoCapitalize="none"
             onChangeText={email => this.setState({ email })}
             value={this.state.email} />
-            <HelperText
-              type="error"
-              visible={false}
-            >
-              Error: Only letters are allowed
-            </HelperText>
+
           <TextInput
             mode="outlined"
             secureTextEntry
@@ -50,25 +41,33 @@ export default class Login extends React.Component {
             autoCapitalize="none"
             onChangeText={password => this.setState({ password })}
             value={this.state.password} />
-             <HelperText
-              type="error"
-              visible={false}
-            >
-              Error: Only letters are allowed
-            </HelperText>
+
         </View>
 
         <View style={styles.btnBox} >
-          <TouchableHighlight style={styles.btnLogin} onPress={this.handleLogin}>
-            <Text style={styles.textMenu}>Entrar</Text>
-          </TouchableHighlight>
 
-          <Text style={styles.ouCadastrar}>Ou</Text>
+          <Button icon="send" mode="contained" onPress={this.handleLogin}>
+              Entrar
+          </Button>
 
-          <TouchableHighlight style={styles.btnSingUp} onPress={() => this.props.navigation.navigate('SignUp')}>
-            <Text style={{ color: '#212121', fontWeight: 'bold' }}>Cadastrar</Text>
-          </TouchableHighlight>
+          <Title style={styles.ouCadastrar}>Ou</Title>
+
+          <Button icon="plus" mode="outlined" onPress={() => this.props.navigation.navigate('SignUp')}>
+              Cadastrar
+          </Button>
         </View>
+        <Snackbar
+          visible={this.state.errorMessage != null}
+          onDismiss={() => this.setState({ errorMessage: null })}
+          action={{
+            label: 'Fechar',
+            onPress: () => {
+              this.setState({ errorMessage: null })
+            },
+          }}
+        >
+          {this.state.errorMessage}
+        </Snackbar>
       </View>
     )
   }
@@ -79,6 +78,7 @@ const styles = StyleSheet.create({
     height,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 50,
   },
   textInput: {
     width,
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
   },
   btnBox: {
     width,
+    paddingVertical: 5,
     paddingHorizontal: 5,
   },
   inputBox: {
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
   ouCadastrar: {
-    paddingTop: 15,
+    paddingTop: 5,
+    paddingBottom: 5,
     textAlign: 'center',
   }
 })

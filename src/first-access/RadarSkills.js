@@ -15,10 +15,7 @@ export default class RadarSkills extends React.Component {
 	constructor(props) {
 		super(props);
 		const user = this.props.navigation.getParam('user', null);
-		const dataUsuario = this.props.navigation.getParam('dataUsuario', null);
-		if (user == null || dataUsuario == null) {
-			this.props.navigation.navigate('Login');
-		}
+		const dataUsuario = this.props.navigation.getParam('dataUsuario', {});
 
 		this.state = {
 			user,
@@ -71,6 +68,10 @@ export default class RadarSkills extends React.Component {
 
 	componentDidMount() {
 		const { dataUsuario, valueFormatter } = this.state;
+
+		if(dataUsuario.skills == null){
+			dataUsuario.skills = [10,10,10,10,10,10,10,10]
+		}
 
 		this.setState(
 			update(this.state, {

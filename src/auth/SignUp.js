@@ -1,38 +1,54 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableHighlight, View, Dimensions } from 'react-native'
-import { TextInput, HelperText } from 'react-native-paper';
-
+import { StyleSheet, View, Dimensions } from 'react-native'
+import { TextInput, Button, Snackbar } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-const { height, width } = Dimensions.get('window');
 import firebase from 'react-native-firebase'
 
+const { height, width } = Dimensions.get('window');
 export default class SignUp extends React.Component {
-  state = {name: '', email: '', password: '', errorMessage: null }
-  handleSignUp = () => {
-    const { email, name, password} =this.state;
-    // TODO: Firebase stuff...
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        return result.user.updateProfile({
-          displayName: name
-        })
-        this.props.navigation.navigate('Home')}
-      )
-      .catch(error => this.setState({ errorMessage: error.message }))
+  state = { name: '', email: '', password: '', errorMessage: null }
 
+  handleSignUp = () => {
+    const { email, name, password } = this.state;
+
+    if(email != '' && name != '' && password != ''){
+
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((result) => {
+          result.user.updateProfile({
+            displayName: name
+          })
+          return result.user
+        }).then(async (user) => {
+          await firebase.firestore().collection('usuarios').doc(user.uid).set({
+            firstAccess: true,
+            skills:[10,10,10,10,10,10,10, 10],
+            segunda: [],
+            terca: [],
+            quarta: [],
+            quinta: [],
+            sexta: [],
+            sabado: [],
+            domingo: [],
+          });
+          return user;
+        }).then((user) => {
+          this.props.navigation.navigate('Loading')
+        })
+        .catch(error => this.setState({ errorMessage: error.message }))
+
+      }else{
+        this.setState({errorMessage: 'Confira os dados digitados'})
+      }
+      
   }
+
   render() {
     return (
       <View style={styles.container}>
-        {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {this.state.errorMessage}
-          </Text>}
-
-        <View style={styles.inputBox} >
+        <View style={styles.inputBox}>
           <TextInput
             mode="outlined"
             label='Nome'
@@ -45,12 +61,6 @@ export default class SignUp extends React.Component {
                 color='black'
               />
             } />
-            <HelperText
-              type="error"
-              visible={true}
-            >
-              Error: Only letters are allowed
-            </HelperText>
 
           <TextInput
             mode="outlined"
@@ -82,10 +92,22 @@ export default class SignUp extends React.Component {
             } />
         </View>
         <View style={styles.btnBox} >
-          <TouchableHighlight style={styles.btnSingUp} onPress={this.handleSignUp}>
-            <Text style={styles.textMenu}>Cadastrar</Text>
-          </TouchableHighlight>
+          <Button icon="plus" mode="contained" onPress={this.handleSignUp}>
+            Cadastrar
+          </Button>
         </View>
+
+        <Snackbar
+          visible={this.state.errorMessage != null}
+          onDismiss={() => this.setState({ errorMessage: null })}
+          action={{
+            label: 'Fechar',
+            onPress: () => {
+              this.setState({ errorMessage: null })
+            },
+          }}>
+          {this.state.errorMessage}
+        </Snackbar>
       </View>
     )
   }
@@ -96,6 +118,7 @@ const styles = StyleSheet.create({
     height,
     justifyContent: 'center',
     alignItems: 'center',
+    margin: 50,
   },
   textInput: {
     width,
@@ -117,6 +140,7 @@ const styles = StyleSheet.create({
   },
   btnBox: {
     width,
+    margin: 5,
     paddingHorizontal: 5,
   },
   inputBox: {

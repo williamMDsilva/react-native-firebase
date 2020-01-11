@@ -16,8 +16,8 @@ export default class FirstAcessScreen extends React.Component {
     }
     componentDidMount() {
         const user = this.props.navigation.getParam('user', null);
-        const dataUsuario = this.props.navigation.getParam('dataUsuario', null);
-        if(user == null || dataUsuario == null){
+        const dataUsuario = this.props.navigation.getParam('dataUsuario', {});
+        if(user == null){
             this.props.navigation.navigate('Login');
         }
         this.setState({user, dataUsuario});
