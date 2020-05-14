@@ -13,8 +13,8 @@ export default class StartCalendarScreen extends React.Component {
     };
     constructor(props) {
         super(props);
-        const user = props.navigation.getParam('user', null);
-        const dataUsuario = props.navigation.getParam('dataUsuario', {});
+        // const user = props.navigation.getParam('user', null);
+        // const dataUsuario = props.navigation.getParam('dataUsuario', {});
         if(user == null){
            props.navigation.navigate('Login');
         }

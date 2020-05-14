@@ -13,6 +13,12 @@ export default class HomeDash extends React.Component {
   };
   constructor(props){
     super(props);
+    const user = props.navigation.getParam('user', null);
+    const dataUsuario = props.navigation.getParam('dataUsuario', {});
+    state = {
+      user,
+      dataUsuario
+    }
   }
   state = {
     index: 0,
@@ -27,20 +33,31 @@ export default class HomeDash extends React.Component {
 
   _handleIndexChange = index => this.setState({ index });
 
-  _renderScene = BottomNavigation.SceneMap({
-    home: HomeRoute,
-    mapa: MapaRoute,
-    perfil: PerfilRoute,
-    config: ConfigRoute,
-    logout: LogOut,
-  });
+  // _renderScene = BottomNavigation.SceneMap({
+  //   home: <HomeRoute user={{nome:"wiliam", teste:123}}/>,
+  //   mapa: MapaRoute,
+  //   perfil: PerfilRoute,
+  //   config: ConfigRoute,
+  //   logout: LogOut,
+  // });
+
+  renderScene = ({ route, jumpTo }) => {
+    const { user, dataUsuario} = this.state;
+
+    switch (route.key) {
+      case 'home':
+        return <HomeRoute user={user} dataUsuario={dataUsuario} />;
+      case 'mapa':
+        return <mapa />;
+    }
+  }
 
   render() {
     return (
       <BottomNavigation
         navigationState={this.state}
         onIndexChange={this._handleIndexChange}
-        renderScene={this._renderScene}
+        renderScene={this.renderScene}
       />
     );
   }

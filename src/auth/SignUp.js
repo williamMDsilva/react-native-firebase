@@ -35,7 +35,7 @@ export default class SignUp extends React.Component {
           });
           return user;
         }).then((user) => {
-          this.props.navigation.navigate('Loading')
+          this.props.navigation.push('Loading')
         })
         .catch(error => this.setState({ errorMessage: error.message }))
 

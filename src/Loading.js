@@ -9,7 +9,7 @@ export default class Loading extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
-                this.props.navigation.navigate('Login')
+                this.props.navigation.push('Login')
             }
             const refUsers = firebase.firestore().collection('usuarios').doc(user.uid);
             refUsers.get()
@@ -19,7 +19,7 @@ export default class Loading extends React.Component {
                         if(dataUsuario.firstAccess){
                             this.props.navigation.navigate('FirstLogin', {user, dataUsuario})
                         }else{
-                            this.props.navigation.navigate('HomeDash')
+                            this.props.navigation.navigate('HomeDash', {user, dataUsuario})
                         }
                     }else{
                         this.props.navigation.navigate('FirstLogin')
