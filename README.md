@@ -1,3 +1,2 @@
-# Sonata-mobile
 
-projeto-violino-facil-sonata-app
+react-native-firebase EXEMPLE
